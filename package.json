@@ -2,6 +2,7 @@
   "name": "seer-fyi-api",
   "version": "0.0.1",
   "description": "Documented API for connecting to Seer.fyi",
+  "main" : "index.js",
   "scripts": {
     "slate": "rm -rf node_modules && npm install",
     "start": "NODE_ENV=development node index.js --progress --colors --profile",
