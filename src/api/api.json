@@ -24,7 +24,6 @@
         "image",
         "title",
         "price",
-        "imagesArray",
         "url",
         "root",
         "currency"
@@ -44,9 +43,6 @@
         },
         "currency": {
           "type": "string"
-        },
-        "imagesArray": {
-          "type": "array"
         }
       }
     },
@@ -118,42 +114,6 @@
     }
   },
   "paths": {
-    "/fetch/{url}": {
-      "get": {
-        "tags": [ "Data capture operation" ],
-        "summary": "finds product details from url",
-        "parameters": [
-          {
-            "name": "url",
-            "in": "path",
-            "description": "Url of product to fetch",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Captured data response",
-            "schema": {
-              "type": "object",
-              "items": {
-                "$ref": "#/definitions/Product"
-              }
-            },
-            "headers": {
-              "x-expires": {
-                "type": "string"
-              }
-            }
-          },
-          "default": {
-            "description": "unexpected error",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
-          }
-        }
-      }
-    },
     "/fetch": {
       "post": {
         "tags": [ "Data capture operation" ],
@@ -162,7 +122,6 @@
           {
             "name": "url",
             "in": "body",
-            "type" : "object",
             "schema": {
               "$ref": "#/definitions/FetchPost"
             }

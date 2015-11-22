@@ -105,3 +105,11 @@ Then visit
 ```
 http://localhost:14001
 ```
+
+## Documents
+
+Swagger UI is found at:
+
+```
+http://localhost:14001/ui
+```

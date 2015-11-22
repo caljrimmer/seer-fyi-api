@@ -19,7 +19,9 @@
     "express":"^4.0.0",
     "body-parser" : "^1.14.0",
     "restler-q": "*",
-    "swaggerize-express": "^4.0.5"
+    "swaggerize-express": "^4.0.5",
+    "swaggerize-ui": "^1.0.1",
+    "swagger-parser": "^3.3.0"
   },
   "devDependencies": {
     "babel": "^5.8.21",
