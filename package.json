@@ -9,21 +9,21 @@
     "build": "babel src --out-dir lib",
     "start": "NODE_ENV=development node index.js --progress --colors --profile",
     "test" : "NODE_ENV=test mocha --compilers js:babel/register --recursive",
-    "preinstall": "npm run clean && npm run build"
+    "postinstall": "npm run clean && npm run build"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/caljrimmer/seer-fyi-api.git"
   },
   "dependencies": {
-    "babel": "^5.8.21",
-    "babel-core": "^5.8.22",
     "express":"^4.0.0",
     "body-parser" : "^1.14.0",
     "restler-q": "*",
     "swaggerize-express": "^4.0.5"
   },
   "devDependencies": {
+    "babel": "^5.8.21",
+    "babel-core": "^5.8.22",
     "jsdom-no-contextify": "^3.1.0",
     "mocha": "^2.1.0",
     "expect": "^1.12.1"
