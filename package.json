@@ -2,11 +2,14 @@
   "name": "seer-fyi-api",
   "version": "0.0.1",
   "description": "Documented API for connecting to Seer.fyi",
-  "main" : "index.js",
+  "main" : "lib/app.js",
   "scripts": {
     "slate": "rm -rf node_modules && npm install",
+    "clean" : "rm -rf lib",
+    "build": "babel src --out-dir lib",
     "start": "NODE_ENV=development node index.js --progress --colors --profile",
-    "test" : "NODE_ENV=test mocha --compilers js:babel/register --recursive"
+    "test" : "NODE_ENV=test mocha --compilers js:babel/register --recursive",
+    "prepublish": "npm run clean && npm run build"
   },
   "repository": {
     "type": "git",
