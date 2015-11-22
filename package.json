@@ -9,7 +9,7 @@
     "build": "babel src --out-dir lib",
     "start": "NODE_ENV=development node index.js --progress --colors --profile",
     "test" : "NODE_ENV=test mocha --compilers js:babel/register --recursive",
-    "prepublish": "npm run clean && npm run build"
+    "preinstall": "npm run clean && npm run build"
   },
   "repository": {
     "type": "git",
