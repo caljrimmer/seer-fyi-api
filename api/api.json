@@ -1,0 +1,196 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Seer.fyi Data Capture API",
+    "contact": {
+      "name": "Seer.fyi API Team",
+      "url": "http://seer.fyi"
+    },
+    "license": {
+      "name": "Creative Commons 4.0 International",
+      "url": "http://creativecommons.org/licenses/by/4.0/"
+    }
+  },
+  "host": "seer.fyi",
+  "basePath": "/api",
+  "schemes": [
+    "http"
+  ],
+  "definitions": {
+    "Product": {
+      "type": "object",
+      "required": [
+        "image",
+        "title",
+        "price",
+        "imagesArray",
+        "url",
+        "root",
+        "currency"
+      ],
+      "properties": {
+        "image": {
+          "type": "string"
+        },
+        "price": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        },
+        "root": {
+          "type": "string"
+        },
+        "currency": {
+          "type": "string"
+        },
+        "imagesArray": {
+          "type": "array"
+        }
+      }
+    },
+    "FetchPost": {
+      "type" : "object",
+      "required" : ["url"],
+      "properties": {
+        "url": {
+          "type": "string",
+          "pattern" : "(https?):\/\/[A-Za-z0-9]"
+        },
+        "debug": {
+          "type": "boolean"
+        },
+        "selectors": {
+          "type" : "array",
+          "items": {
+            "$ref": "#/definitions/FetchSelector"
+          }
+        },
+        "text": {
+          "type" : "array",
+          "items": {
+            "$ref": "#/definitions/FetchText"
+          }
+        }
+      }
+    },
+    "FetchText": {
+      "type" : "object",
+      "required" : ["name","value"],
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "value": {
+          "type":"string"
+        }
+      }
+    },
+    "FetchSelector": {
+      "type" : "object",
+      "required" : ["name","value"],
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string",
+          "pattern": ":::"
+        }
+      }
+    },
+    "Error": {
+      "type": "object",
+      "required": [
+        "code",
+        "message"
+      ],
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "paths": {
+    "/fetch/{url}": {
+      "get": {
+        "tags": [ "Data capture operation" ],
+        "summary": "finds product details from url",
+        "parameters": [
+          {
+            "name": "url",
+            "in": "path",
+            "description": "Url of product to fetch",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Captured data response",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Product"
+              }
+            },
+            "headers": {
+              "x-expires": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/fetch": {
+      "post": {
+        "tags": [ "Data capture operation" ],
+        "summary": "Finds product details from posted url",
+        "parameters": [
+          {
+            "name": "url",
+            "in": "body",
+            "type" : "object",
+            "schema": {
+              "$ref": "#/definitions/FetchPost"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Captured data response",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Product"
+              }
+            },
+            "headers": {
+              "x-expires": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    }
+  }
+}
